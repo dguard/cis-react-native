@@ -32,7 +32,7 @@
 
 ## How this looks
   <p align="center">
-    <img src="/captures/exchange.jpg" alt="screenshot" />
+    <img width=400 src="/captures/exchange.jpg" alt="screenshot" />
   </p>
 
   
