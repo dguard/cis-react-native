@@ -5,7 +5,6 @@
 
 
 <p float="left">
-<a href='http://mobx.js.org'><img src='https://web-creator.ru/uploads/Page/17/mobx.svg' height='110' alt='MobX Logo' aria-label='mobx.js.org' /></a>
 
 <a href='https://callstack.github.io/react-native-paper/'><img src='https://raw.githubusercontent.com/callstack/react-native-paper/master/docs/assets/images/paper-logo.svg?sanitize=true' height='110' alt='Redux Logo' aria-label='https://callstack.github.io/react-native-paper/' /></a>
 
