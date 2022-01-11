@@ -31,7 +31,7 @@
 
 
 ## How this looks
-  <p align="center">
+  <p align="left">
     <img width=400 src="/captures/exchange.jpg" alt="screenshot" />
   </p>
 
