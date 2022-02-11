@@ -1,165 +1,153 @@
-import React, {useState} from "react";
-import styles from "app/screens/Login/styles";
+import React, { useCallback, useState } from 'react'
+import { bgImage } from 'app/assets/index'
+import axios from 'axios'
+import DropDown from 'react-native-paper-dropdown'
 
+import { ImageBackground, TextInput, View } from './styles'
 
-import {Dimensions, View, ImageBackground} from 'react-native';
-let dimensions = Dimensions.get('window');
-console.log(dimensions);
-
-
-import { TextInput } from 'react-native-paper';
-import DropDown from "react-native-paper-dropdown";
-
-
-
-const componentDidMount = (cb) => {
-    React.useEffect(cb)
-};
-
-const http_get = (url: any): Promise<any> => {
-    return new Promise((resolve, reject) => {
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = (e) => {
-            if (request.readyState !== 4) {
-                return;
-            }
-
-            if (request.status === 200) {
-                console.log('success', request.responseText);
-                return resolve(request);
-            } else {
-                console.warn('error');
-                return reject(request);
-            }
-        };
-
-        request.open('GET', url);
-        request.send();
-    });
+type ExchangeItem = {
+  id: string
+  name: string
+  value: string
 }
 
+type ExchangeRateItem = {
+  label: string
+  value: string
+}
+
+const ComponentDidMount = (cb: any) => {
+  React.useEffect(cb)
+}
 
 const Currency: React.FC = () => {
-    const [listExchangeRate, setListExchangeRate] = useState(null as any);
-    const [amount, setAmount] = useState("100" as any);
+  const [listExchangeRate, setListExchangeRate] = useState<ExchangeItem[] | undefined>(undefined)
+  const [amount, setAmount] = useState<string>('100')
 
-    const [selectedTargetCurrency, setSelectedTargetCurrency] = useState('Доллар США');
-    const [convertedValue, _setConvertedValue] = useState(null as any);
+  const [selectedTargetCurrency, setSelectedTargetCurrency] = useState<string>('Доллар США')
+  const [convertedValue, setConvertedValueInternal] = useState<string | undefined>(undefined)
 
-    const [currencyShowDropdown, setCurrencyShowDropdown] = useState(false);
-    const [targetCurrencyShowDropdown, setTargetCurrencyShowDropdown] = useState(false);
+  const [currencyShowDropdown, setCurrencyShowDropdown] = useState<boolean>(false)
+  const [targetCurrencyShowDropdown, setTargetCurrencyShowDropdown] = useState<boolean>(false)
 
-    componentDidMount(() => {
-        if(listExchangeRate) {
-            return;
-        }
-
-        http_get(`https://www.cbr-xml-daily.ru/daily_json.js`).then((resp: any) => {
-            console.log();
-
-            const Valute = JSON.parse(resp.responseText)['Valute'];
-            let _listValutes = Object.keys(Valute).map((key: any) => {
-                return {
-                    'id': Valute[key]['ID'],
-                    'name': Valute[key]['Name'],
-                    'value': Valute[key]['Value']
-                }
-            });
-            setListExchangeRate(_listValutes);
-
-
-        })
-    });
-    componentDidMount(() => {
-        if(listExchangeRate) {
-            setConvertedValue(amount, selectedTargetCurrency);
-        }
-    });
-
-    const currencyData = [{
-        label: 'RUB',
-        value: 'RUB'
-    }];
-
-    let targetCurrency = [];
-    if(listExchangeRate) {
-        targetCurrency = listExchangeRate.map((item: any) => {
-            return {
-                label: item.name,
-                value: item.name
-            }
-        })
+  ComponentDidMount(() => {
+    const updateCurrency = async () => {
+      if (listExchangeRate) {
+        return
+      }
+      const { Valute } = (await axios.get(`https://www.cbr-xml-daily.ru/daily_json.js`)).data
+      const listValutesInternal = Object.keys(Valute).map((key: any) => ({
+        id: Valute[key].ID,
+        name: Valute[key].Name,
+        value: Valute[key].Value,
+      }))
+      setListExchangeRate(listValutesInternal)
     }
+    updateCurrency()
+  })
+  ComponentDidMount(() => {
+    if (listExchangeRate) {
+      setConvertedValue(amount, selectedTargetCurrency)
+    }
+  })
 
-    const setConvertedValue = (amount: any, selectedTargetCurrency: any) => {
-        if(listExchangeRate) {
-            const _convertedValue = Number(amount / listExchangeRate.filter((item: any) => {
-                return item['name'] === selectedTargetCurrency
-            })[0].value).toFixed(5);
+  const currencyData = [
+    {
+      label: 'RUB',
+      value: 'RUB',
+    },
+  ]
 
-            _setConvertedValue(_convertedValue);
-        }
-    };
+  let targetCurrency: ExchangeRateItem[] = []
+  if (listExchangeRate) {
+    targetCurrency = listExchangeRate.map((item: any) => ({
+      label: item.name,
+      value: item.name,
+    }))
+  }
 
-    const onSubmitAmount = (value: any) => {
-        setAmount(value);
-        setConvertedValue(value, selectedTargetCurrency);
-    };
+  const setConvertedValue = useCallback(
+    (amountInternal: any, selectedTargetCurrencyInternal: any) => {
+      if (listExchangeRate) {
+        const convertedValueInternal = Number(
+          amountInternal /
+            Number(
+              listExchangeRate.filter(
+                (item: any) => item.name === selectedTargetCurrencyInternal,
+              )[0].value,
+            ),
+        ).toFixed(5)
 
-    const onSubmitTargetCurrency = (value: any) => {
-        setSelectedTargetCurrency(value);
-        setConvertedValue(amount, value);
-    };
+        setConvertedValueInternal(convertedValueInternal)
+      }
+    },
+    [listExchangeRate, setConvertedValueInternal],
+  )
 
+  const onSubmitAmount = useCallback(
+    (value: any) => {
+      setAmount(value)
+      setConvertedValue(value, selectedTargetCurrency)
+    },
+    [selectedTargetCurrency, setAmount, setConvertedValue],
+  )
 
-    return (
-        <View style={styles.container}>
-            <ImageBackground source={require("../../assets/bg.jpg")} resizeMode="cover" style={{width: '100%', height: '100%'}}>
-                <View style={{padding: 20}}>
-                    <View style={{marginBottom: 10}}>
-                        <DropDown
-                            label={"Currency"}
-                            mode={"outlined"}
-                            visible={currencyShowDropdown}
-                            showDropDown={() => setCurrencyShowDropdown(true)}
-                            onDismiss={() => setCurrencyShowDropdown(false)}
-                            value={currencyData[0].value}
-                            setValue={()=>{}}
-                            list={currencyData}
-                        />
-                    </View>
-                    <View style={{marginBottom: 10}}>
-                        <TextInput
-                            label="Amount"
-                            value={amount}
-                            onChangeText={text => onSubmitAmount(text)}
-                        />
-                    </View>
-                    <View style={{marginBottom: 10}}>
-                        <DropDown
-                            label={"Target Currency"}
-                            mode={"outlined"}
-                            visible={targetCurrencyShowDropdown}
-                            showDropDown={() => setTargetCurrencyShowDropdown(true)}
-                            onDismiss={() => setTargetCurrencyShowDropdown(false)}
-                            value={selectedTargetCurrency}
-                            setValue={(value)=>{onSubmitTargetCurrency(value)}}
-                            list={targetCurrency}
-                        />
-                    </View>
-                    <TextInput
-                        label="Converted Value"
-                        value={convertedValue}
-                        onChangeText={text => {}}
-                    />
+  const onSubmitTargetCurrency = useCallback(
+    (value: any) => {
+      setSelectedTargetCurrency(value)
+      setConvertedValue(amount, value)
+    },
+    [amount, setSelectedTargetCurrency, setConvertedValue],
+  )
 
-
-
-                </View>
-
-            </ImageBackground>
+  return (
+    <View alignItems="center" flex={1} justifyContent="center">
+      <ImageBackground height="100%" resizeMode="cover" source={bgImage} width="100%">
+        <View padding={20}>
+          <View mb={10}>
+            <DropDown
+              label="Currency"
+              list={currencyData}
+              mode="outlined"
+              setValue={() => {}}
+              showDropDown={() => setCurrencyShowDropdown(true)}
+              value={currencyData[0].value}
+              visible={currencyShowDropdown}
+              onDismiss={() => setCurrencyShowDropdown(false)}
+            />
+          </View>
+          <View mb={10}>
+            <TextInput
+              autoComplete={false}
+              label="Amount"
+              value={amount}
+              onChangeText={text => onSubmitAmount(text)}
+            />
+          </View>
+          <View mb={10}>
+            <DropDown
+              label="Target Currency"
+              list={targetCurrency}
+              mode="outlined"
+              setValue={value => {
+                onSubmitTargetCurrency(value)
+              }}
+              showDropDown={() => setTargetCurrencyShowDropdown(true)}
+              value={selectedTargetCurrency}
+              visible={targetCurrencyShowDropdown}
+              onDismiss={() => setTargetCurrencyShowDropdown(false)}
+            />
+          </View>
+          <TextInput
+            autoComplete={false}
+            label="Converted Value"
+            value={convertedValue}
+            onChangeText={() => {}}
+          />
         </View>
-    );
-};
+      </ImageBackground>
+    </View>
+  )
+}
 
-export default Currency;
+export default Currency

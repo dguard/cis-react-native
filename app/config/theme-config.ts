@@ -1,11 +1,8 @@
 import {
-  DarkTheme as PaperDarkTheme,
-  DefaultTheme as PaperDefaultTheme,
-} from 'react-native-paper';
-import {
-  DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme,
-} from '@react-navigation/native';
+  DefaultTheme as NavigationDefaultTheme,
+} from '@react-navigation/native'
+import { DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme } from 'react-native-paper'
 
 export const PaperThemeDefault = {
   ...PaperDefaultTheme,
@@ -13,7 +10,7 @@ export const PaperThemeDefault = {
     ...PaperDefaultTheme.colors,
     primary: '#3498db',
   },
-};
+}
 
 export const PaperThemeDark = {
   ...PaperDarkTheme,
@@ -21,19 +18,19 @@ export const PaperThemeDark = {
     ...PaperDarkTheme.colors,
     primary: '#3498db',
   },
-};
+}
 
 export const CombinedDefaultTheme = {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
-    colors: {
-        ...NavigationDarkTheme.colors,
-        background: '#303030',
-        card: '#a5d1fe',
-        text: '#ffffff',
-        backdrop: 'transparent',
-    },
-};
+  colors: {
+    ...NavigationDarkTheme.colors,
+    background: '#303030',
+    card: '#a5d1fe',
+    text: '#ffffff',
+    backdrop: 'transparent',
+  },
+}
 
 export const CombinedDarkTheme = {
   ...PaperDarkTheme,
@@ -44,4 +41,4 @@ export const CombinedDarkTheme = {
     card: '#222222',
     text: '#ffffff',
   },
-};
+}

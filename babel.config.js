@@ -7,7 +7,7 @@ module.exports = {
   },
   plugins: [
     [
-      require.resolve('babel-plugin-module-resolver'),
+      'module-resolver',
       {
         cwd: 'babelrc',
         extensions: ['.ts', '.tsx', '.js', '.ios.js', '.android.js'],
@@ -18,4 +18,4 @@ module.exports = {
     ],
     'jest-hoist',
   ],
-};
+}

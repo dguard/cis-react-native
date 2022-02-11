@@ -20,5 +20,5 @@ const AppStyles = {
     // FONT_REGULAR: 'Roboto-Regular',
     // FONT_MEDIUM: 'Roboto-Medium'
   },
-};
-export default AppStyles;
+}
+export default AppStyles
