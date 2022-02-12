@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react'
-import { bgImage } from 'app/assets/index'
 import axios from 'axios'
 import DropDown from 'react-native-paper-dropdown'
+
+import { bgImage } from 'assets/index'
 
 import { ImageBackground, TextInput, View } from './styles'
 
@@ -102,7 +103,11 @@ const Currency: React.FC = () => {
 
   return (
     <View alignItems="center" flex={1} justifyContent="center">
-      <ImageBackground height="100%" resizeMode="cover" source={bgImage} width="100%">
+      <ImageBackground
+        height={'100%' as any}
+        resizeMode="cover"
+        source={bgImage}
+        width={'100%' as any}>
         <View padding={20}>
           <View mb={10}>
             <DropDown
@@ -117,12 +122,7 @@ const Currency: React.FC = () => {
             />
           </View>
           <View mb={10}>
-            <TextInput
-              autoComplete={false}
-              label="Amount"
-              value={amount}
-              onChangeText={text => onSubmitAmount(text)}
-            />
+            <TextInput label="Amount" value={amount} onChangeText={text => onSubmitAmount(text)} />
           </View>
           <View mb={10}>
             <DropDown
@@ -138,12 +138,7 @@ const Currency: React.FC = () => {
               onDismiss={() => setTargetCurrencyShowDropdown(false)}
             />
           </View>
-          <TextInput
-            autoComplete={false}
-            label="Converted Value"
-            value={convertedValue}
-            onChangeText={() => {}}
-          />
+          <TextInput label="Converted Value" value={convertedValue} onChangeText={() => {}} />
         </View>
       </ImageBackground>
     </View>

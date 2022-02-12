@@ -4,18 +4,21 @@
  */
 import React from 'react'
 import { ActivityIndicator } from 'react-native'
+import { IThemeState } from 'models/reducers/theme'
+import { Provider as PaperProvider } from 'react-native-paper'
+import { Provider, useSelector } from 'react-redux'
+import { PersistGate } from 'redux-persist/es/integration/react'
+
 import {
   CombinedDarkTheme,
   CombinedDefaultTheme,
   PaperThemeDark,
   PaperThemeDefault,
-} from 'app/config/theme-config'
-import { IThemeState } from 'app/models/reducers/theme'
-import Navigator from 'app/navigation'
-import configureStore from 'app/store'
-import { Provider as PaperProvider } from 'react-native-paper'
-import { Provider, useSelector } from 'react-redux'
-import { PersistGate } from 'redux-persist/es/integration/react'
+} from 'config/theme-config'
+
+import Navigator from 'navigation'
+
+import configureStore from 'store'
 
 const { persistor, store } = configureStore()
 

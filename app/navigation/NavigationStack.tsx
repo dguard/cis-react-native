@@ -2,9 +2,10 @@ import * as React from 'react'
 import { StatusBar } from 'react-native'
 import { NavigationContainer, Theme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import Currency from 'app/screens/Currency'
+import ThemeController from 'components/ThemeController'
 
-import ThemeController from '../components/ThemeController'
+import Currency from 'screens/Currency'
+
 import { navigationRef } from './NavigationService'
 
 const Stack = createStackNavigator()
