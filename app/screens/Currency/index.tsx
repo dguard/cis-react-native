@@ -52,7 +52,7 @@ const Currency: React.FC = () => {
     }
   })
 
-  const currencyData = [
+  const currencyData: ExchangeRateItem[] = [
     {
       label: 'RUB',
       value: 'RUB',
