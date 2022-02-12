@@ -26,18 +26,19 @@
 |  📦 |  |
 | React Native 📦 | [cis-react-native](https://github.com/dguard/cis-react-native) |
 
-
 ## How this looks
+
   <p align="left">
     <img width=400 src="/captures/exchange.jpg" alt="screenshot" />
+    <img width=400 src="/captures/exchange-dark.jpg" alt="screenshot" />
   </p>
 
-  
 ## Prerequisites
 
 - [Node](https://nodejs.org) v12 (it is recommended to install it via [NVM](https://github.com/creationix/nvm))
 - [Yarn](https://yarnpkg.com/)
-- A development machine set up for React Native by following [these instructions](https://facebook.github.io/react-native/docs/getting-started.html)
+- A development machine set up for React Native by
+  following [these instructions](https://facebook.github.io/react-native/docs/getting-started.html)
 
 ## Getting Started
 
@@ -50,23 +51,21 @@
 6. Run the test application:
 
 - On Android:
-  - Run `react-native run-android` or Use Android Studio (Recommended)
+    - Run `react-native run-android` or Use Android Studio (Recommended)
 - On iOS:
-  - Open `ios/YourReactProject.xcworkspace` in Xcode
-  - Hit `Run` after selecting the desired device
+    - Open `ios/YourReactProject.xcworkspace` in Xcode
+    - Hit `Run` after selecting the desired device
 
 7. Enjoy!!!
-
 
 ## Stay in touch
 
 - Contributor: [Alexander Serditov](https://cv.digitallyconstructed.ru/)
 - Uses parts from contributor: [Victor K Varghese](https://github.com/victorkvarghese/react-native-boilerplate)
 
-
 ## License
 
-  [MIT licensed](LICENSE).
+[MIT licensed](LICENSE).
 
 ## Contributing
 
