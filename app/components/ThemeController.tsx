@@ -16,12 +16,11 @@ const ThemeController: React.FC = () => {
   const dispatch = useDispatch()
   const handleToggleTheme = () => dispatch(themeActions.setIsDarkTheme(!isDark) as any)
   const iconName = isDark ? 'weather-night' : 'white-balance-sunny'
-  const iconColor = isDark ? 'white' : 'black'
 
   return (
     <View style={styles.container}>
       <Switch value={isDark} onValueChange={handleToggleTheme} />
-      <Icon color={iconColor} name={iconName} size={20} style={styles.icon} />
+      <Icon color="white" name={iconName} size={20} style={styles.icon} />
     </View>
   )
 }

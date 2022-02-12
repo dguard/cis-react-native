@@ -8,7 +8,7 @@ export const PaperThemeDefault = {
   ...PaperDefaultTheme,
   colors: {
     ...PaperDefaultTheme.colors,
-    primary: '#3498db',
+    primary: '#321b0b',
   },
 }
 
@@ -16,7 +16,7 @@ export const PaperThemeDark = {
   ...PaperDarkTheme,
   colors: {
     ...PaperDarkTheme.colors,
-    primary: '#3498db',
+    primary: '#321b0b',
   },
 }
 
@@ -26,7 +26,7 @@ export const CombinedDefaultTheme = {
   colors: {
     ...NavigationDarkTheme.colors,
     background: '#303030',
-    card: '#a5d1fe',
+    card: '#321b0b',
     text: '#ffffff',
     backdrop: 'transparent',
   },
