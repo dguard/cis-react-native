@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import axios from 'axios'
 import { IThemeState } from 'models/reducers/theme'
-import { DarkTheme, DefaultTheme, Provider, ThemeProvider } from 'react-native-paper'
 import DropDown from 'react-native-paper-dropdown'
 import { useSelector } from 'react-redux'
 
@@ -110,54 +109,46 @@ const Currency: React.FC = () => {
   )
 
   return (
-    <Provider theme={isDark ? DarkTheme : DefaultTheme}>
-      <ThemeProvider theme={isDark ? DarkTheme : DefaultTheme}>
-        <View alignItems="center" flex={1} justifyContent="center">
-          <ImageBackground
-            height={'100%' as any}
-            resizeMode="cover"
-            source={isDark ? bgDarkImage : bgImage}
-            width={'100%' as any}>
-            <View padding={20}>
-              <View mb={10}>
-                <DropDown
-                  label="Currency"
-                  list={currencyData}
-                  mode="flat"
-                  setValue={() => {}}
-                  showDropDown={() => setCurrencyShowDropdown(true)}
-                  value={currencyData[0].value}
-                  visible={currencyShowDropdown}
-                  onDismiss={() => setCurrencyShowDropdown(false)}
-                />
-              </View>
-              <View mb={10}>
-                <TextInput
-                  label="Amount"
-                  value={amount}
-                  onChangeText={text => onSubmitAmount(text)}
-                />
-              </View>
-              <View mb={10}>
-                <DropDown
-                  label="Target Currency"
-                  list={targetCurrency}
-                  mode="flat"
-                  setValue={value => {
-                    onSubmitTargetCurrency(value)
-                  }}
-                  showDropDown={() => setTargetCurrencyShowDropdown(true)}
-                  value={selectedTargetCurrency}
-                  visible={targetCurrencyShowDropdown}
-                  onDismiss={() => setTargetCurrencyShowDropdown(false)}
-                />
-              </View>
-              <TextInput label="Converted Value" value={convertedValue} onChangeText={() => {}} />
-            </View>
-          </ImageBackground>
+    <View alignCenter justifyCenter stretch>
+      <ImageBackground
+        resizeMode="cover"
+        source={isDark ? bgDarkImage : bgImage}
+        fullHeight
+        fullWidth>
+        <View padding={20}>
+          <View mb={10}>
+            <DropDown
+              label="Currency"
+              list={currencyData}
+              mode="flat"
+              setValue={() => {}}
+              showDropDown={() => setCurrencyShowDropdown(true)}
+              value={currencyData[0].value}
+              visible={currencyShowDropdown}
+              onDismiss={() => setCurrencyShowDropdown(false)}
+            />
+          </View>
+          <View mb={10}>
+            <TextInput label="Amount" value={amount} onChangeText={text => onSubmitAmount(text)} />
+          </View>
+          <View mb={10}>
+            <DropDown
+              label="Target Currency"
+              list={targetCurrency}
+              mode="flat"
+              setValue={value => {
+                onSubmitTargetCurrency(value)
+              }}
+              showDropDown={() => setTargetCurrencyShowDropdown(true)}
+              value={selectedTargetCurrency}
+              visible={targetCurrencyShowDropdown}
+              onDismiss={() => setTargetCurrencyShowDropdown(false)}
+            />
+          </View>
+          <TextInput label="Converted Value" value={convertedValue} onChangeText={() => {}} />
         </View>
-      </ThemeProvider>
-    </Provider>
+      </ImageBackground>
+    </View>
   )
 }
 

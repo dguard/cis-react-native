@@ -7,8 +7,11 @@
     "react",
     "reactjs",
     "react native",
-    "snake",
-    "bellman-ford shortest path",
+    "currency",
+    "exchange",
+    "converter",
+    "styled system",
+    "styled components",
     "redux"
   ],
   "scripts": {

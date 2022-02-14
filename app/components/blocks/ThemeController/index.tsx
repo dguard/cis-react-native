@@ -1,10 +1,12 @@
 import React from 'react'
-import { StyleSheet, Switch, View } from 'react-native'
+import { Switch } from 'react-native'
+import { Icon } from 'components/ui'
 import { IThemeState } from 'models/reducers/theme'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useDispatch, useSelector } from 'react-redux'
 
 import * as themeActions from 'store/actions/themeActions'
+
+import { Row } from './styles'
 
 interface IState {
   themeReducer: IThemeState
@@ -18,21 +20,11 @@ const ThemeController: React.FC = () => {
   const iconName = isDark ? 'weather-night' : 'white-balance-sunny'
 
   return (
-    <View style={styles.container}>
+    <Row mx={12} my={12} alignCenter justifyEnd>
       <Switch value={isDark} onValueChange={handleToggleTheme} />
-      <Icon color="white" name={iconName} size={20} style={styles.icon} />
-    </View>
+      <Icon color="white" ml={1} name={iconName} size={20} />
+    </Row>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-    margin: 12,
-  },
-  icon: { marginLeft: 4 },
-})
 
 export default ThemeController

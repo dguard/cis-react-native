@@ -1,12 +1,9 @@
 import { ImageBackground as ImageBackgroundInternal, View as ViewInternal } from 'react-native'
 import { TextInput as TextInputInternal } from 'react-native-paper'
-import styled from 'styled-components/native'
+import styled, { css } from 'styled-components/native'
 import {
-  alignItems,
   AlignItemsProps,
-  flex,
   FlexProps,
-  justifyContent,
   JustifyContentProps,
   layout,
   LayoutProps,
@@ -14,16 +11,42 @@ import {
   MarginProps,
   padding,
   PaddingProps,
+  styleFn,
 } from 'styled-system'
 
-type ViewProps = MarginProps & PaddingProps & FlexProps & JustifyContentProps & AlignItemsProps
+type ViewProps = MarginProps &
+  PaddingProps &
+  FlexProps &
+  JustifyContentProps &
+  AlignItemsProps & {
+    stretch?: boolean
+    justifyCenter?: boolean
+    alignCenter?: boolean
+  }
 
+const stretchCss: styleFn = ({ stretch }: ViewProps) =>
+  stretch &&
+  css`
+    flex: 1;
+  `
+
+const justifyCenterCss: styleFn = ({ justifyCenter }: ViewProps) =>
+  justifyCenter &&
+  css`
+    justify-content: center;
+  `
+
+const alignCenterCss: styleFn = ({ alignCenter }: ViewProps) =>
+  alignCenter &&
+  css`
+    align-items: center;
+  `
 export const View = styled(ViewInternal)<ViewProps>`
   ${margin}
   ${padding}
-  ${flex}
-  ${justifyContent}
-  ${alignItems}
+  ${stretchCss}
+  ${justifyCenterCss}
+  ${alignCenterCss}
 `
 
 type TextInputProps = {
@@ -31,7 +54,24 @@ type TextInputProps = {
 }
 export const TextInput = styled(TextInputInternal)<TextInputProps>``
 
-type ImageBackgroundProps = LayoutProps
+type ImageBackgroundProps = LayoutProps & {
+  fullWidth?: boolean
+  fullHeight?: boolean
+}
+
+const fullWidthCss: styleFn = ({ fullWidth }: ImageBackgroundProps) =>
+  fullWidth &&
+  css`
+    width: 100%;
+  `
+const fullHeightCss: styleFn = ({ fullHeight }: ImageBackgroundProps) =>
+  fullHeight &&
+  css`
+    height: 100%;
+  `
+
 export const ImageBackground = styled(ImageBackgroundInternal)<ImageBackgroundProps>`
   ${layout}
+  ${fullWidthCss}
+  ${fullHeightCss}
 `
