@@ -1,21 +1,20 @@
 import * as React from 'react'
 import { StatusBar } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, NavigationContainerRef } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import ThemeController from 'components/blocks/ThemeController'
+import { ThemeController } from 'components/blocks/ThemeController'
 import { DarkTheme, DefaultTheme, ThemeProvider as ThemeProviderPaper } from 'react-native-paper'
 import { ThemeProvider } from 'styled-components/native'
 
-import { useTheme } from 'services/store/theme'
+import { useTheme } from 'services/theme'
 
-import Currency from 'screens/Currency'
-
-import { navigationRef } from './NavigationService'
+import { CurrencyScreen } from 'screens/currency/screen'
 
 const Stack = createStackNavigator()
 
-function App() {
+export const App = () => {
   const { theme } = useTheme()
+  const navigationRef = React.createRef<NavigationContainerRef>()
 
   return (
     <ThemeProviderPaper theme={theme.dark ? DarkTheme : DefaultTheme}>
@@ -25,7 +24,7 @@ function App() {
 
           <Stack.Navigator>
             <Stack.Screen
-              component={Currency}
+              component={CurrencyScreen}
               name="Currency"
               options={{
                 headerRight: () => <ThemeController />,
@@ -37,5 +36,3 @@ function App() {
     </ThemeProviderPaper>
   )
 }
-
-export default App

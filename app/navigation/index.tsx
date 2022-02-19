@@ -1,3 +1,1 @@
-import NavigationStack from './NavigationStack'
-
-export default NavigationStack
+export { App as NavigationStack } from './navigationStack'

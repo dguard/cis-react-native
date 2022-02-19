@@ -1,5 +1,4 @@
 import { ImageBackground as ImageBackgroundInternal, View as ViewInternal } from 'react-native'
-import { TextInput as TextInputInternal } from 'react-native-paper'
 import styled, { css } from 'styled-components/native'
 import {
   AlignItemsProps,
@@ -48,12 +47,6 @@ export const View = styled(ViewInternal)<ViewProps>`
   ${justifyCenterCss}
   ${alignCenterCss}
 `
-
-type TextInputProps = {
-  children?: any
-}
-export const TextInput = styled(TextInputInternal)<TextInputProps>``
-
 type ImageBackgroundProps = LayoutProps & {
   fullWidth?: boolean
   fullHeight?: boolean

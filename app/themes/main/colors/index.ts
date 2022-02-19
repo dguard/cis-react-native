@@ -1,4 +1,4 @@
-import blockColors from './block'
-import screenColors from './screen'
+import { blockColors } from './block'
+import { screenColors } from './screen'
 
-export default Object.assign(blockColors, screenColors)
+export const colors = Object.assign(blockColors, screenColors)

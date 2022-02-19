@@ -8,15 +8,15 @@ import { Provider as PaperProvider } from 'react-native-paper'
 import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/es/integration/react'
 
-import Navigator from 'navigation'
+import { NavigationStack } from 'navigation'
 
-import configureStore from 'store'
+import { configureStore } from 'store'
 
 const { persistor, store } = configureStore()
 
-const RootNavigation: React.FC = () => <Navigator />
+const RootNavigation: React.FC = () => <NavigationStack />
 
-const EntryPoint: React.FC = () => (
+export const Entrypoint: React.FC = () => (
   <PaperProvider>
     <Provider store={store}>
       <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
@@ -25,5 +25,3 @@ const EntryPoint: React.FC = () => (
     </Provider>
   </PaperProvider>
 )
-
-export default EntryPoint

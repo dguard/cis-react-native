@@ -1,6 +1,6 @@
-import palette from 'themes/main/palette'
+import { palette } from 'themes/main/palette'
 
-export default {
+export const blockColors = {
   block: {
     themeController: {
       icon: {

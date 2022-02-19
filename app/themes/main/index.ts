@@ -3,10 +3,10 @@ import {
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native'
 import { DefaultTheme as PaperDefaultTheme } from 'react-native-paper'
-import colors from 'themes/main/colors'
-import palette from 'themes/main/palette'
+import { colors } from 'themes/main/colors'
+import { palette } from 'themes/main/palette'
 
-export default {
+export const theme = {
   ...PaperDefaultTheme,
   ...NavigationDefaultTheme,
   colors: {
