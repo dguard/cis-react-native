@@ -12,7 +12,7 @@ import { CurrencyScreen } from 'screens/currency/screen'
 
 const Stack = createStackNavigator()
 
-export const App = () => {
+export function App() {
   const { theme } = useTheme()
   const navigationRef = React.createRef<NavigationContainerRef>()
 

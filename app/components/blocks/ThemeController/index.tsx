@@ -8,7 +8,7 @@ import { ThemeReducerInterface } from 'store/reducers/themeReducer'
 
 import { Row } from './styles'
 
-export const ThemeController: React.FC = () => {
+export function ThemeController() {
   const isDark = useSelector((state: ThemeReducerInterface) => state.themeReducer.isDark)
 
   const dispatch = useDispatch()

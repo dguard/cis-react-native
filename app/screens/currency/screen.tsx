@@ -11,7 +11,7 @@ import { ThemeReducerInterface } from 'store/reducers/themeReducer'
 
 import { ImageBackground, View } from './styles'
 
-export const CurrencyScreen: React.FC = () => {
+export function CurrencyScreen() {
   const [listExchangeRate, setListExchangeRate] = useState<MayBeExchangeItem>()
   const [amount, setAmount] = useState('100')
 

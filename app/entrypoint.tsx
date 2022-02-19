@@ -14,14 +14,16 @@ import { configureStore } from 'store'
 
 const { persistor, store } = configureStore()
 
-const RootNavigation: React.FC = () => <NavigationStack />
+const RootNavigation = () => <NavigationStack />
 
-export const Entrypoint: React.FC = () => (
-  <PaperProvider>
-    <Provider store={store}>
-      <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
-        <RootNavigation />
-      </PersistGate>
-    </Provider>
-  </PaperProvider>
-)
+export function Entrypoint() {
+  return (
+    <PaperProvider>
+      <Provider store={store}>
+        <PersistGate loading={<ActivityIndicator />} persistor={persistor}>
+          <RootNavigation />
+        </PersistGate>
+      </Provider>
+    </PaperProvider>
+  )
+}
